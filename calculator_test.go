@@ -29,17 +29,32 @@ func TestAdd(t *testing.T) {
 
 func TestSubtract(t *testing.T) {
 	t.Parallel()
-	var want float64 = 2
-	got := calculator.Subtract(4, 2)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+	testCases := []testCase{
+		{a: 2, b: 2, want: 0},
+		{a: 1, b: 0.1, want: 0.9},
+		{a: -10, b: 9, want: -19},
+	}
+
+	for _, tc := range testCases {
+		got := calculator.Subtract(tc.a, tc.b)
+		if tc.want != got {
+			t.Errorf("want %f, got %f", tc.want, got)
+		}
 	}
 }
+
 func TestMultiply(t *testing.T) {
 	t.Parallel()
-	var want float64 = 8
-	got := calculator.Multiply(4, 2)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+	testCases := []testCase{
+		{a: 2, b: 3, want: 6},
+		{a: -10, b: 9, want: -90},
+		{a: -10, b: -9, want: 90},
+	}
+
+	for _, tc := range testCases {
+		got := calculator.Multiply(tc.a, tc.b)
+		if tc.want != got {
+			t.Errorf("want %f, got %f", tc.want, got)
+		}
 	}
 }
